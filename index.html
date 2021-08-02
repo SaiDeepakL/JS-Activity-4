@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body style="background-color: white;">
+<div>
+  <h3 style="text-align: center;"> Login Form </h3>
+<form  class="container" id="loginForm">
+<div class="form-group" style="text-align: center;">
+  <label for="userName">Enter the User Name:</label>
+  &nbsp;
+  <input type="text" class="form-control" id="userName" style="background-color: blue;color:white;">
+</div>
+<br/>
+<div class="form-group" style="text-align: center;">
+  <label for="password">Enter the Password:</label>
+  &nbsp;&nbsp;&nbsp;
+  <input type="text" class="form-control" id="password" style="background-color: blue; color:white;">
+</div>
+<br/><br/>
+<div style="text-align: center;">
+<button onclick="submitLogin()" style="background-color: blue;"><span style="color:white">Submit</span></button>
+&nbsp;
+<button onclick="cancelLogin()" style="background-color: blue;"><span style="color:white">Cancel</span></button>
+</div>
+<div id="resultText" style="text-align: center;"></div>
+</form>
+</div>
+<script>
+  var userName = document.getElementById('userName'),
+    password = document.getElementById('password'),
+    resultText = document.getElementById('resultText');
+
+    function submitLogin(){
+      let validPassword=false;
+     
+      if(userName.value== "" || password.value=="")
+      {
+        resultText.innerHTML=`<h3>Invalid input</h3>`;
+        
+      }
+      else{
+        validPassword = validatePassword(password.value);
+        if(validPassword == true){
+          resultText.innerHTML=`<h3>Password is valid</h3>`;
+        }
+      }
+    }
+
+    function validatePassword(password){
+      if(password.length == 8){
+        let passwordFormat=/^(?=.*[0-9])(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Za-z]).{8,}$/;
+        if(passwordFormat.test(password)){
+          return true;
+        }
+        else{
+          resultText.innerHTML=`<h3>Password doesn't meet required standard</h3>`;
+        return false;
+        }
+      }
+      else{
+        resultText.innerHTML=`<h3>Password should be 8 characters</h3>`;
+        return false;
+      }
+    }
+
+    function cancelLogin(){
+      userName.value== "" ;
+      password.value== "" ;
+    }
+</script>
+</body>
+</html>
